@@ -1,52 +1,135 @@
-<p align="center">
-	<img alt="logo" src="https://oscimg.oschina.net/oscnet/up-43e3941654fa3054c9684bf53d1b1d356a1.png">
-</p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">RuoYi v1.1.0</h1>
-<h4 align="center">基于UniApp开发的轻量级移动端框架</h4>
-<p align="center">
-	<a href="https://gitee.com/y_project/RuoYi-App/stargazers"><img src="https://gitee.com/y_project/RuoYi-App/badge/star.svg?theme=dark"></a>
-	<a href="https://gitee.com/y_project/RuoYi-App"><img src="https://img.shields.io/badge/RuoYi-v1.1.0-brightgreen.svg"></a>
-	<a href="https://gitee.com/y_project/RuoYi-App/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
-</p>
+
+<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">图安校园安防微信小程序v1.0</h1>
+<h4 align="center">基于UniApp开发的微信小程序</h4>
+
 
 ## 平台简介
 
-RuoYi App 移动解决方案，采用uniapp框架，一份代码多终端适配，同时支持APP、小程序、H5！实现了与[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue)、[RuoYi-Cloud](https://gitee.com/y_project/RuoYi-Cloud)完美对接的移动解决方案！目前已经实现登录、我的、工作台、编辑资料、头像修改、密码修改、常见问题、关于我们等基础功能。
+图安校园安防微信小程序，采用uniapp框架，实现了与[tuan-admin-ui](https://github.com/QJC1123/tuan-admin-ui)对接的移动解决方案！目前已经实现登录、我的、工作台、告警通知、隐患上报、访客预约、定位打卡、人脸识别等功能。
 
-* 配套后端代码仓库地址[RuoYi-Vue](https://gitee.com/y_project/RuoYi-Vue) 或 [RuoYi-Cloud](https://github.com/yangzongzhuan/RuoYi-Cloud) 版本。
+图安校园安防微信小程序，属于“校园安防智能保障系统”的平台之一，“校园安防智能保障系统”项目获第十四届服务外包创新创业大赛**国家级二等奖**。
+
+
 * 应用框架基于[uniapp](https://uniapp.dcloud.net.cn/)，支持小程序、H5、Android和IOS。
 * 前端组件采用[uni-ui](https://github.com/dcloudio/uni-ui)，全端兼容的高性能UI框架。
-* 阿里云折扣场：[点我进入](http://aly.ruoyi.vip)，腾讯云秒杀场：[点我进入](http://txy.ruoyi.vip)&nbsp;&nbsp;
-* 阿里云优惠券：[点我领取](https://www.aliyun.com/minisite/goods?userCode=brki8iof&share_source=copy_link)，腾讯云优惠券：[点我领取](https://cloud.tencent.com/redirect.php?redirect=1025&cps_key=198c8df2ed259157187173bc7f4f32fd&from=console)&nbsp;&nbsp;
+* 定位打卡。利用微信API获取用户地理位置，使用腾讯地图SDK获取地址信息，实现定位打卡。
+* 人脸识别。利用camera组件和takePhoto方法获取照片，压缩为Base64格式，传递给后端进行人脸比对，实现人脸识别功能。
 
 
-## 技术文档
 
-- 官网网站：[http://ruoyi.vip](http://ruoyi.vip)
-- 文档地址：[http://doc.ruoyi.vip](http://doc.ruoyi.vip)
-- H5页体验：[http://h5.ruoyi.vip](http://h5.ruoyi.vip)
-- QQ交流群： ①133713780
-- 小程序体验
+## 功能模块
 
-<img src="https://oscimg.oschina.net/oscnet/up-26c76dc90b92acdbd9ac8cd5252f07c8ad9.jpg" alt="小程序演示"/>
- 
+* #### 工作台 #### 
+    各个安防应用的入口，可以通过工作台快速访问告警处理、隐患上报、访客预约等功能。
+
+* #### 告警消息 #### 
+   收到实时的告警事件通知，安保人员可以迅速响应并认领处理各类安全问题。
+
+* #### 隐患消息 #### 
+    展示与隐患相关的处理信息，包括隐患发现、整改进度等。
+
+* #### 隐患上报 #### 
+    填写隐患上报表单，并上传相关图片，快速发现并解决潜在的安全隐患。
+
+* #### 访客消息 #### 
+    用于预约人员查看他们的申请进度，包括访客预约成功通知、到访提醒。
+
+* #### 访客预约 #### 
+    填写访客预约申请表单，填写预约信息、来访时间等，并获得预约结果通知。
+
+* #### 定位打卡 #### 
+
+1. 微信用户授权获取定位。
+引入微信地图组件，请求用户授权获取经纬度信息。
+2. 地图SDK获取地理位置信息。
+经纬度信息传递给腾讯地图 SDK，利用腾讯地图 SDK 的逆地址解析功能，获取对应的地理位置（地名）信息。
+3. 后台设置打卡点
+设置打卡点的地址经纬度，打卡范围参数，存储在数据库中，以便小程序访问。
+4. 计算距离
+Haversine 公式根据经纬度计算距离，判断用户是否可在该位置打卡。
+
+
+* #### 人脸识别 #### 
+1. 使用 camera 组件拍照
+引入 camera 组件，点击按钮触发拍照操作。
+使用 takePhoto 方法获取用户拍摄的图片。
+2. 将图片压缩为 base64 格式
+压缩图片，转换为 base64 编码的字符串。
+将 base64 格式的图片数据传递给后端。
+3. 调用百度人脸识别API
+后端接收到前端传递的 base64 格式的图片数据，直接将 base64 编码的图片数据传递给百度人脸识别API进行人脸比对。
+百度人脸识别API返回识别结果，后端根据识别结果进行相应的处理和响应。
+
+
+* #### 消息列表 #### 
+    各项安防消息列表，包括告警消息、访客预约消息、隐患处理消息、打卡提醒消息等。
+
+
 
 ## 演示图
 
 <table>
     <tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-3ea20e447ac621a161e395fb53ccc683d84.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-a6f23cf9a371a30165e135eff6d9ae89a9d.png"/></td>
-		<td><img src="https://oscimg.oschina.net/oscnet/up-ff5f62016bf6624c1ff27eee57499dccd44.png"/></td>
+        <td>
+            <img src="img/1.png"/>
+            <div class="caption">入口界面</div>
+        </td>
+        <td>
+            <img src="img/2.png"/>
+            <div class="caption">告警消息</div>
+        </td>
+        <td>
+            <img src="img/3.png"/>
+            <div class="caption">隐患消息</div>
+        </td>
     </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-b9a582fdb26ec69d407fabd044d2c8494df.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-96427ee08fca29d77934cfc8d1b1a637cef.png"/></td>
-		<td><img src="https://oscimg.oschina.net/oscnet/up-5fdadc582d24cccd7727030d397b63185a3.png"/></td>
+    <tr>
+        <td>
+            <img src="img/4.png"/>
+            <div class="caption">隐患上报</div>
+        </td>
+        <td>
+            <img src="img/5.png"/>
+            <div class="caption">访客消息</div>
+        </td>
+        <td>
+            <img src="img/6.png"/>
+            <div class="caption">访客预约</div>
+        </td>
     </tr>
-	<tr>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-0a36797b6bcc50c36d40c3c782665b89efc.png"/></td>
-        <td><img src="https://oscimg.oschina.net/oscnet/up-d77995cc00687cedd00d5ac7d68a07ea276.png"/></td>
-		<td><img src="https://oscimg.oschina.net/oscnet/up-fa8f5ab20becf59b4b38c1b92a9989e7109.png"/></td>
+    <tr>
+        <td>
+            <img src="img/7.png"/>
+            <div class="caption">定位打卡</div>
+        </td>
+        <td>
+            <img src="img/8.png"/>
+            <div class="caption">人脸识别</div>
+        </td>
+        <td>
+            <img src="img/9.png"/>
+            <div class="caption">消息列表</div>
+        </td>
     </tr>
 </table>
+
+
+## 开发
+        # 克隆项目
+        git clone https://github.com/QJC1123/tuan-wx-ui
+
+        # 进入项目目录
+        cd tuan-wx-ui
+
+        # 安装依赖
+        npm install
+
+        # 启动服务
+        npm run dev
+
+<style>
+    .caption {
+        text-align: center;
+    }
+</style>
+
