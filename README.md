@@ -12,8 +12,12 @@
 
 * 应用框架基于[uniapp](https://uniapp.dcloud.net.cn/)，支持小程序、H5、Android和IOS。
 * 前端组件采用[uni-ui](https://github.com/dcloudio/uni-ui)，全端兼容的高性能UI框架。
-* 定位打卡。利用微信API获取用户地理位置，使用腾讯地图SDK获取地址信息，实现定位打卡。
-* 人脸识别。利用camera组件和takePhoto方法获取照片，压缩为Base64格式，传递给后端进行人脸比对，实现人脸识别功能。
+* 实现定位打卡。利用[微信API](https://developers.weixin.qq.com/miniprogram/dev/framework/app-service/api.html)获取用户地理位置，使用[腾讯地图SDK](https://lbs.qq.com/mobile/androidMapSDK/developerGuide/androidSummary)获取地址信息，实现定位打卡。
+* 实现人脸识别。利用camera组件和takePhoto方法获取照片，压缩为Base64格式，传递给后端，使用[百度人脸识别API](https://ai.baidu.com/ai-doc/FACE/Yk37c1opz)，进行人脸比对，实现人脸识别功能。
+  
+
+
+
 
 ## 功能模块
 <img src="img/10.png"/>
